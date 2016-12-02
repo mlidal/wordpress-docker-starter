@@ -1,4 +1,5 @@
 version: '2'
+
 services:
   db:
     image: mysql:5.7
@@ -12,9 +13,9 @@ services:
       MYSQL_PASSWORD: wordpress
 
   wordpress:
+    build: .
     depends_on:
       - db
-    image: wordpress:latest
     links:
       - db
     ports:
@@ -26,5 +27,6 @@ services:
 
     volumes:
       - ./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
+      - ./zip.ini:/usr/local/etc/php/conf.d/zip.ini
       - ./wp-content:/var/www/html/wp-content
 
